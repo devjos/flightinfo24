@@ -17,8 +17,8 @@ public class CoordinatesTest {
 	@Test
 	public void simple() {
 		final Coordinates c = new Coordinates(1.2d, 3.4d);
-		assertEquals(1.2d, c.getLongitude(), 0.01d);
-		assertEquals(3.4d, c.getLatitude(), 0.01d);
+		assertEquals(1.2d, c.getLatitude(), 0.01d);
+		assertEquals(3.4d, c.getLongitude(), 0.01d);
 	}
 
 	@Test
@@ -37,7 +37,7 @@ public class CoordinatesTest {
 
 	@Test
 	public void nearestFromFlight() throws Exception {
-		final Coordinates c = new Coordinates(11.79d, 48.19d);
+		final Coordinates c = new Coordinates(48.19, 11.79);
 
 		final FlightDetails flight = Util
 				.FlightDetailsFromFile(new File(getClass().getClassLoader().getResource("21a42311.json").toURI()));
@@ -45,8 +45,8 @@ public class CoordinatesTest {
 		final List<Waypoint> waypoints = flight.getTrail();
 		final Waypoint nearest = c.nearest(waypoints);
 
-		assertEquals(11.801268, nearest.getLongitude(), 0.001);
 		assertEquals(48.22081, nearest.getLatitude(), 0.001);
+		assertEquals(11.801268, nearest.getLongitude(), 0.001);
 	}
 
 }

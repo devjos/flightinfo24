@@ -28,7 +28,7 @@ public class FlightPositionFileLoggerTest {
 
 		List<String> lines = Files.readAllLines(LOGFILE);
 		assertEquals(1, lines.size());
-		assertEquals("time,longitude,latitude,speed,altitude,flightnumber,airline,aircraft,callsign", lines.get(0));
+		assertEquals("time,latitude,longitude,speed,altitude,flightnumber,airline,aircraft,callsign", lines.get(0));
 
 		final FlightPosition pos = new FlightPosition(1565422385, 1.2, 3.4d, 123, 38000, "LH304", "LH", "A320",
 				"DLH4JF");

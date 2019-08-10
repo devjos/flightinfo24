@@ -71,8 +71,8 @@ public class DepartingFlightListener implements FeedListener, RemovalListener<St
 			final Coordinates c = ctx.getConfig().getLocation();
 			final Waypoint nearest = c.nearest(trail);
 
-			final double distance = Distance.calculateDistance(c.getLongitude(), c.getLatitude(),
-					nearest.getLongitude(), nearest.getLatitude());
+			final double distance = Distance.calculateDistance(c.getLatitude(), c.getLongitude(), nearest.getLatitude(),
+					nearest.getLongitude());
 
 			// log only if flight was close enough
 			// 0.3 is equal to about 3.33km

@@ -6,7 +6,7 @@
     </Console>
     <RollingFile name="FlightPositionLogger" fileName="logs/flights.log"
                  filePattern="logs/flights-%d{yyyy-MM-dd}.log.gz">
-      <PatternLayout header="time,longitude,latitude,speed,altitude,flightnumber,airline,aircraft,callsign%n">
+      <PatternLayout header="time,latitude,longitude,speed,altitude,flightnumber,airline,aircraft,callsign%n">
         <Pattern>%m%n</Pattern>
       </PatternLayout>
       <Policies>

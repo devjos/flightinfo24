@@ -31,12 +31,12 @@ public class Waypoint {
 		this.angle = angle;
 	}
 
-	public double getLongitude() {
-		return longitude;
-	}
-
 	public double getLatitude() {
 		return latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
 	}
 
 	public int getAltitude() {

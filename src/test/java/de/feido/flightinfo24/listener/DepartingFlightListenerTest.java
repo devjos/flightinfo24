@@ -21,7 +21,7 @@ public class DepartingFlightListenerTest {
 	@Test
 	public void logsEntry() throws Exception {
 
-		final Coordinates c = new Coordinates(11.79d, 48.19d);
+		final Coordinates c = new Coordinates(48.19d, 11.79d);
 		final Config config = new Config(c, "MUC", 15);
 		final HttpService http = new HttpService(new MyHttpClient("feedMucSimple.json", "21a34ab8.json"));
 		final FakeTicker ticker = new FakeTicker();

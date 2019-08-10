@@ -21,7 +21,7 @@ public class FeedURI {
 	}
 
 	public static FeedURI fromSquare(Coordinates c, double sideLength) {
-		return FeedURI.fromSquare(c.getLongitude(), c.getLatitude(), sideLength);
+		return FeedURI.fromSquare(c.getLatitude(), c.getLongitude(), sideLength);
 	}
 
 	/**
@@ -33,7 +33,7 @@ public class FeedURI {
 	 * @param sideLength
 	 * @return
 	 */
-	public static FeedURI fromSquare(double longitude, double latitude, double sideLength) {
+	public static FeedURI fromSquare(double latitude, double longitude, double sideLength) {
 		return new FeedURI(latitude + sideLength / 2, latitude - sideLength / 2, longitude - sideLength / 2,
 				longitude + sideLength / 2);
 	}

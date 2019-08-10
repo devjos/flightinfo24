@@ -1,8 +1,8 @@
 {
 	
 	location: {
-		longitude: 11.79,
-		latitude: 48.19
+		latitude: 48.19,
+		longitude: 11.79
 	},
 	origin: "MUC",
 	pingInterval: 45

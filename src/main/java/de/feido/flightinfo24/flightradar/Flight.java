@@ -141,13 +141,13 @@ public class Flight {
 			return this;
 		}
 
-		public Builder longitude(double longitude) {
-			this.longitude = longitude;
+		public Builder latitude(double latitude) {
+			this.latitude = latitude;
 			return this;
 		}
 
-		public Builder latitude(double latitude) {
-			this.latitude = latitude;
+		public Builder longitude(double longitude) {
+			this.longitude = longitude;
 			return this;
 		}
 

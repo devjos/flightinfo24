@@ -14,8 +14,8 @@ public class ConfigTest {
 	@Test
 	public void parse() throws IOException {
 		final Config c = Config.fromFile(new File("config.json"));
-		assertEquals(11.79d, c.getLocation().getLongitude(), 0.001d);
 		assertEquals(48.19d, c.getLocation().getLatitude(), 0.001d);
+		assertEquals(11.79d, c.getLocation().getLongitude(), 0.001d);
 		assertEquals("MUC", c.getOrigin());
 		assertEquals(45, c.getPingInterval());
 	}
