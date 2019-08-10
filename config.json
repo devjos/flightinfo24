@@ -5,6 +5,6 @@
 		latitude: 48.19
 	},
 	origin: "MUC",
-	pingInterval: 25
+	pingInterval: 45
 	
 }

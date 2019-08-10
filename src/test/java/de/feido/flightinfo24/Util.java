@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import de.feido.flightinfo24.flightradar.Feed;
+import de.feido.flightinfo24.flightradar.FlightDetails;
 import de.feido.flightinfo24.http.FeedAdapter;
 
 public class Util {
@@ -18,6 +19,13 @@ public class Util {
 				.create();
 		try (FileReader fr = new FileReader(f)) {
 			return gson.fromJson(fr, Feed.class);
+		}
+	}
+
+	public static FlightDetails FlightDetailsFromFile(File f) throws IOException {
+		final Gson gson = new GsonBuilder().create();
+		try (FileReader fr = new FileReader(f)) {
+			return gson.fromJson(fr, FlightDetails.class);
 		}
 	}
 

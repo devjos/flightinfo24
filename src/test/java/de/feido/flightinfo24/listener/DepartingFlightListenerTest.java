@@ -35,7 +35,7 @@ public class DepartingFlightListenerTest {
 		l.onFeed(feed);
 
 		assertEquals(1, l.cacheSize());
-		ticker.advance(3, TimeUnit.MINUTES);
+		ticker.advance(4, TimeUnit.MINUTES);
 		l.cleanUp();
 
 		assertEquals(0, l.cacheSize());

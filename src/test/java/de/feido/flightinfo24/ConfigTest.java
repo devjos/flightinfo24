@@ -17,7 +17,7 @@ public class ConfigTest {
 		assertEquals(11.79d, c.getLocation().getLongitude(), 0.001d);
 		assertEquals(48.19d, c.getLocation().getLatitude(), 0.001d);
 		assertEquals("MUC", c.getOrigin());
-		assertEquals(25, c.getPingInterval());
+		assertEquals(45, c.getPingInterval());
 	}
 
 	@Test

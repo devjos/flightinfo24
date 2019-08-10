@@ -46,7 +46,7 @@ public class Flightinfo24App {
 
 		// first decimal place is worth up to 11.1 km
 		// https://gis.stackexchange.com/questions/8650/measuring-accuracy-of-latitude-and-longitude
-		final FeedURI uri = FeedURI.fromSquare(config.getLocation(), 0.1f);
+		final FeedURI uri = FeedURI.fromSquare(config.getLocation(), 0.15f);
 
 		final HttpService httpService = new HttpService(client);
 

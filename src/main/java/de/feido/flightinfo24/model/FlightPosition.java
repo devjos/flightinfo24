@@ -12,9 +12,10 @@ public class FlightPosition {
 	private final String flightnumber;
 	private final String airline;
 	private final String aircraft;
+	private final String callsign;
 
 	public FlightPosition(long time, double longitude, double latitude, int speed, int altitude, String flightnumber,
-			String airline, String aircraft) {
+			String airline, String aircraft, String callsign) {
 		this.time = time;
 		this.longitude = longitude;
 		this.latitude = latitude;
@@ -23,6 +24,7 @@ public class FlightPosition {
 		this.flightnumber = flightnumber;
 		this.airline = airline;
 		this.aircraft = aircraft;
+		this.callsign = callsign;
 	}
 
 	public long getTime() {
@@ -57,25 +59,13 @@ public class FlightPosition {
 		return aircraft;
 	}
 
-	public static FlightPosition fromLine(String line) {
-		final String[] attributes = line.split(",");
-		if (attributes.length != 8) {
-			throw new IllegalArgumentException("Must have exactly 8 arguments, found " + attributes.length);
-		}
-		final long time = Long.parseLong(attributes[0]);
-		final double longitude = Double.parseDouble(attributes[1]);
-		final double latitude = Double.parseDouble(attributes[2]);
-		final int speed = Integer.parseInt(attributes[3]);
-		final int altitude = Integer.parseInt(attributes[4]);
-		final String flightnumber = attributes[5];
-		final String airline = attributes[6];
-		final String aircraft = attributes[7];
-		return new FlightPosition(time, longitude, latitude, speed, altitude, flightnumber, airline, aircraft);
+	public String getCallsign() {
+		return callsign;
 	}
 
 	@Override
 	public String toString() {
-		return String.format(Locale.ENGLISH, "%d,%.2f,%.2f,%d,%d,%s,%s,%s", time, longitude, latitude, speed, altitude,
-				flightnumber, airline, aircraft);
+		return String.format(Locale.ENGLISH, "%d,%.4f,%.4f,%d,%d,%s,%s,%s,%s", time, longitude, latitude, speed,
+				altitude, flightnumber, airline, aircraft, callsign);
 	}
 }

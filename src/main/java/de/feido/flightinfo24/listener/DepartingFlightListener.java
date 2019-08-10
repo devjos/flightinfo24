@@ -33,7 +33,7 @@ public class DepartingFlightListener implements FeedListener, RemovalListener<St
 		this.cache = CacheBuilder.newBuilder() //
 				.maximumSize(100) //
 				.ticker(ctx.getTicker()) //
-				.expireAfterWrite(2, TimeUnit.MINUTES) //
+				.expireAfterWrite(3, TimeUnit.MINUTES) //
 				.removalListener(this) //
 				.build();
 	}
@@ -70,7 +70,7 @@ public class DepartingFlightListener implements FeedListener, RemovalListener<St
 
 			final FlightPosition pos = new FlightPosition(nearest.getTime(), nearest.getLongitude(),
 					nearest.getLatitude(), nearest.getSpeed(), nearest.getAltitude(), flight.getFlightnumber(),
-					flight.getAirline(), flight.getAircraft());
+					flight.getAirline(), flight.getAircraft(), flight.getCallsign());
 			logger.log(pos);
 
 		} catch (InterruptedException | ExecutionException e) {
