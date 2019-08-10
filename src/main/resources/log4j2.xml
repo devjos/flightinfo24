@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </Console>
+    <RollingFile name="FlightPositionLogger" fileName="logs/flights.log"
+                 filePattern="logs/flights-%d{yyyy-MM-dd}.log.gz">
+      <PatternLayout>
+        <Pattern>%m%n</Pattern>
+      </PatternLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy />
+      </Policies>
+    </RollingFile>
+  </Appenders>
+  <Loggers>
+  	<Logger name="de.feido.flightinfo24.log.FlightPositionFileLogger" level="info">
+  	  <AppenderRef ref="FlightPositionLogger"/>
+  	</Logger>
+    <Root level="info">
+      <AppenderRef ref="Console"/>
+    </Root>
+  </Loggers>
+</Configuration>
