@@ -2,8 +2,8 @@
 ##############################
 # custom
 ##############################
-test/
-logs/
+./test/
+./logs/
 
 ##############################
 # JAVA https://raw.githubusercontent.com/github/gitignore/master/Java.gitignore

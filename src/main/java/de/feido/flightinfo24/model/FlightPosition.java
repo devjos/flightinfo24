@@ -25,6 +25,10 @@ public class FlightPosition {
 		this.aircraft = aircraft;
 	}
 
+	public long getTime() {
+		return time;
+	}
+
 	public double getLongitude() {
 		return longitude;
 	}
@@ -41,12 +45,32 @@ public class FlightPosition {
 		return altitude;
 	}
 
+	public String getFlightNumber() {
+		return flightnumber;
+	}
+
 	public String getAirline() {
 		return airline;
 	}
 
 	public String getAircraft() {
 		return aircraft;
+	}
+
+	public static FlightPosition fromLine(String line) {
+		final String[] attributes = line.split(",");
+		if (attributes.length != 8) {
+			throw new IllegalArgumentException("Must have exactly 8 arguments, found " + attributes.length);
+		}
+		final long time = Long.parseLong(attributes[0]);
+		final double longitude = Double.parseDouble(attributes[1]);
+		final double latitude = Double.parseDouble(attributes[2]);
+		final int speed = Integer.parseInt(attributes[3]);
+		final int altitude = Integer.parseInt(attributes[4]);
+		final String flightnumber = attributes[5];
+		final String airline = attributes[6];
+		final String aircraft = attributes[7];
+		return new FlightPosition(time, longitude, latitude, speed, altitude, flightnumber, airline, aircraft);
 	}
 
 	@Override

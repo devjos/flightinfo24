@@ -58,19 +58,23 @@ public class Flightinfo24App {
 
 		while (true) {
 
+			LOG.info("Update feed");
 			try {
 				final Feed feed = httpService.sendRequest(uri);
 				listener.forEach(l -> l.onFeed(feed));
 			} catch (InterruptedException | ExecutionException e) {
 				if (e.getCause() instanceof ConnectException) {
-					LOG.info("Could not connect.");
+					LOG.warn("Could not connect.");
+					LOG.debug("Could not connect", e);
 				} else {
 					LOG.error("Error getting flight data", e);
 				}
 			}
 
+			LOG.info("Clean up.");
 			listener.forEach(l -> l.cleanUp());
 
+			LOG.info("Sleep {} seconds.", config.getPingInterval());
 			try {
 				Thread.sleep(config.getPingInterval() * 1000);
 			} catch (final InterruptedException e) {
