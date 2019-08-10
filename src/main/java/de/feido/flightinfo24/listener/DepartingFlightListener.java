@@ -46,6 +46,7 @@ public class DepartingFlightListener implements FeedListener, RemovalListener<St
 		LOG.trace("Flights entries:{}", flights.size());
 		flights.stream() //
 				.filter(ctx.getConfig()::testOrigin) //
+				.filter(flight -> 105 < flight.getAngle() && flight.getAngle() < 255) //
 				.filter(flight -> cache.getIfPresent(flight.getId()) == null) //
 				.forEach(flight -> cache.put(flight.getId(), flight));
 	}
@@ -77,8 +78,8 @@ public class DepartingFlightListener implements FeedListener, RemovalListener<St
 			// log only if flight was close enough
 			// 0.3 is equal to about 3.33km
 			if (distance < 0.3) {
-				final FlightPosition pos = new FlightPosition(nearest.getTime(), nearest.getLongitude(),
-						nearest.getLatitude(), nearest.getSpeed(), nearest.getAltitude(), flight.getFlightnumber(),
+				final FlightPosition pos = new FlightPosition(nearest.getTime(), nearest.getLatitude(),
+						nearest.getLongitude(), nearest.getSpeed(), nearest.getAltitude(), flight.getFlightnumber(),
 						flight.getAirline(), flight.getAircraft(), flight.getCallsign());
 				logger.log(pos);
 			} else {
