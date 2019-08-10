@@ -43,6 +43,30 @@ public class DepartingFlightListenerTest {
 	}
 
 	@Test
+	public void doNotLogEntryIfTooFarAway() throws Exception {
+
+		final Coordinates c = new Coordinates(10.79d, 48.19d); // fixed location
+		final Config config = new Config(c, "MUC", 15);
+		final HttpService http = new HttpService(new MyHttpClient("feedMucSimple.json", "21a34ab8.json"));
+		final FakeTicker ticker = new FakeTicker();
+		final Context ctx = new Context(config, http, ticker);
+		final CountingFlightPositionLogger logger = new CountingFlightPositionLogger();
+		final DepartingFlightListener l = new DepartingFlightListener(ctx, logger);
+		assertEquals(0, l.cacheSize());
+
+		final Feed feed = http.sendRequest(FeedURI.fromSquare(c, 0.05d));
+
+		l.onFeed(feed);
+
+		assertEquals(1, l.cacheSize());
+		ticker.advance(4, TimeUnit.MINUTES);
+		l.cleanUp();
+
+		assertEquals(0, l.cacheSize());
+		assertEquals(0, logger.getLogEntryCount());
+	}
+
+	@Test
 	public void cacheContainsEntryOnlyOnce() throws Exception {
 
 		final Coordinates c = new Coordinates(11.79d, 48.19d);

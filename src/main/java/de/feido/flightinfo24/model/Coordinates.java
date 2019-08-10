@@ -27,10 +27,8 @@ public class Coordinates {
 		Waypoint nearest = null;
 
 		for (final Waypoint wp : trail) {
-			final double d1 = Math.abs(latitude - wp.getLatitude());
-			final double d2 = Math.abs(longitude - wp.getLongitude());
-
-			final double distance = Math.hypot(d1, d2);
+			final double distance = Distance.calculateDistance(latitude, longitude, wp.getLatitude(),
+					wp.getLongitude());
 
 			if (distance < minDistance) {
 				minDistance = distance;

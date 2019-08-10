@@ -18,6 +18,8 @@ import de.feido.flightinfo24.flightradar.Flight;
 import de.feido.flightinfo24.flightradar.FlightDetails;
 import de.feido.flightinfo24.flightradar.Waypoint;
 import de.feido.flightinfo24.log.FlightPositionLogger;
+import de.feido.flightinfo24.model.Coordinates;
+import de.feido.flightinfo24.model.Distance;
 import de.feido.flightinfo24.model.FlightPosition;
 
 public class DepartingFlightListener implements FeedListener, RemovalListener<String, Flight> {
@@ -66,12 +68,22 @@ public class DepartingFlightListener implements FeedListener, RemovalListener<St
 			final FlightDetails flightDetails = ctx.getHttp().sendRequest(flight);
 			final List<Waypoint> trail = flightDetails.getTrail();
 
-			final Waypoint nearest = ctx.getConfig().getLocation().nearest(trail);
+			final Coordinates c = ctx.getConfig().getLocation();
+			final Waypoint nearest = c.nearest(trail);
 
-			final FlightPosition pos = new FlightPosition(nearest.getTime(), nearest.getLongitude(),
-					nearest.getLatitude(), nearest.getSpeed(), nearest.getAltitude(), flight.getFlightnumber(),
-					flight.getAirline(), flight.getAircraft(), flight.getCallsign());
-			logger.log(pos);
+			final double distance = Distance.calculateDistance(c.getLongitude(), c.getLatitude(),
+					nearest.getLongitude(), nearest.getLatitude());
+
+			// log only if flight was close enough
+			// 0.3 is equal to about 3.33km
+			if (distance < 0.5) {
+				final FlightPosition pos = new FlightPosition(nearest.getTime(), nearest.getLongitude(),
+						nearest.getLatitude(), nearest.getSpeed(), nearest.getAltitude(), flight.getFlightnumber(),
+						flight.getAirline(), flight.getAircraft(), flight.getCallsign());
+				logger.log(pos);
+			} else {
+				LOG.info("Flight {} is too far away.", flight.getCallsign());
+			}
 
 		} catch (InterruptedException | ExecutionException e) {
 			LOG.error("Could not log flight with id: " + flight.getId(), e);
