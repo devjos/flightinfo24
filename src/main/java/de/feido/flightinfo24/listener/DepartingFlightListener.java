@@ -76,7 +76,7 @@ public class DepartingFlightListener implements FeedListener, RemovalListener<St
 
 			// log only if flight was close enough
 			// 0.3 is equal to about 3.33km
-			if (distance < 0.5) {
+			if (distance < 0.3) {
 				final FlightPosition pos = new FlightPosition(nearest.getTime(), nearest.getLongitude(),
 						nearest.getLatitude(), nearest.getSpeed(), nearest.getAltitude(), flight.getFlightnumber(),
 						flight.getAirline(), flight.getAircraft(), flight.getCallsign());
