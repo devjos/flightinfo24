@@ -4,6 +4,7 @@
 ##############################
 ./test/
 ./logs/
+.DS_Store
 
 ##############################
 # JAVA https://raw.githubusercontent.com/github/gitignore/master/Java.gitignore
